@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>1 Month Together! 🎉</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffd6e7, #c8f4f9);
+            font-family: 'Arial Rounded MT Bold', sans-serif;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .message {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            line-height: 1.6;
+            text-align: center;
+        }
+        .language-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 12px 25px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 25px;
+            background: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        /* Анимации для элементов */
+        .floating-element {
+            position: fixed;
+            pointer-events: none;
+            animation: float 15s infinite linear;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-50vh) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+        .phrase {
+            font-size: 18px;
+            font-style: italic;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .timer {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #ff69b4;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            line-height: 1.6;
+        }
+        /* Конфетти */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            top: -10px;
+            animation: confetti-fall linear infinite;
+        }
+        @keyframes confetti-fall {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-buttons">
+        <button onclick="changeLanguage('ru')">🇷🇺 Русский</button>
+        <button onclick="changeLanguage('en')">🇬🇧 English</button>
+        <button onclick="changeLanguage('ro')">🇷🇴 Română</button>
+    </div>
+    <div class="container">
+        <div class="message" id="message">
+            <!-- Текст будет подставлен через JavaScript -->
+        </div>
+        <div class="timer" id="timer">Загрузка таймера...</div>
+    </div>
+    <script>
+        // Тексты на разных языках
+        const texts = {
+            ru: `<h1>🎉 Месяц нашего общения! 👏</h1>
+                <p>Маргарита - Маргарита,﻿ ведь ты не забыла?﻿
+Маргарита - ты же помнишь,﻿ как все это было.
+Рита, сегодня, а еще конкретнее это отображено на таймере, исполняется ровно месяц с того момента, как мы начали общаться. За это время я пришёл к  осознанию: мне невероятно повезло познакомиться с тобой. Уже в начале нашего общения я почувствовал, что ты — особенный человек, но спустя месяц моя уверенность в этом только окрепла.
+Ты — удивительный человек. Каждая наша беседа для меня — это не просто обмен сообщениями, а нечто большее, что-то действительно ценное и значимое. Мне нравится узнавать тебя, слышать твои мысли и делиться своими. Ты умеешь удивлять, заставлять задуматься, радовать, веселить и даже смешить. Общение с тобой наполняет мои дни теплом и лёгкостью, создаёт ощущение уюта и комфорта.
+Особенно ценно то, что ты остаёшься собой — искренней, честной и открытой. В мире, где так легко потеряться среди суеты и поверхностных связей, ты помогаешь поверить, что настоящее, глубокое общение всё ещё возможно. Твоя доброта и способность быть искренней вдохновляют меня.
+Мне очень близко то, как ты смотришь на мир, твои ценности, убеждения и мировоззрение.  Ты не боишься делиться своей внутренней правдой, и это качество вызывает у меня глубокое уважение. Да, раньше я считал слово "восхищаться" слишком громким, но теперь понимаю, что могу хоть где-то его применить.
+Хочу искренне поблагодарить тебя за этот месяц общения. Спасибо за каждую нашу беседу, за твои мысли, искренность, в общем за тебя. Я очень рад, что ты есть в моей жизни. Это общение стало для меня чем-то особенным, и я не хочу его терять.</p>`,
+            
+            en: `<h1>🎉 Our month of fellowship! 👏</h1>
+                <p>Margarita - Margarita, you haven't forgotten, have you?﻿
+Margarita - You remember how it was.
+Rita, today, and even more specifically it is displayed on the timer, marks exactly one month since we started communicating. During this time I have come to a realization: I am incredibly lucky to have met you. Already at the beginning of our communication I felt that you are a special person, but a month later my confidence in this has only grown stronger.
+You are an amazing person. Every conversation we have with each other is more than just an exchange of messages, it's more than that, it's something really valuable and meaningful. I love getting to know you, hearing your thoughts and sharing my own. You know how to surprise, make me think, delight, amuse and even make me laugh. Communicating with you fills my days with warmth and lightness, creates a feeling of coziness and comfort.
+It is especially valuable that you remain yourself - sincere, honest and open. In a world where it's so easy to get lost amidst the hustle and bustle and superficial connections, you help me believe that real, deep communication is still possible. Your kindness and ability to be genuine inspires me.
+I am very close to the way you look at the world, your values, beliefs and outlook.  You're not afraid to share your inner truth, and that's a quality I have deep respect for. Yes, I used to think the word “admire” was too loud, but now I realize that I can at least apply it somewhere.
+I want to sincerely thank you for this month of communication. Thank you for every conversation we've had, for your thoughts, your sincerity, in general for you. I am very happy to have you in my life. This communication has become something special for me and I don't want to lose it.</p>`,
+            
+            ro: `<h1>👏 Luna comunicării noastre! 🎉</h1>
+                <p>Margarita - Margarita, nu ai uitat, nu-i așa? 
+Margarita - îți amintești cum a fost totul?
+Rita, astăzi, și chiar mai precis este afișat pe cronometru, marchează exact o lună de când am început să comunicăm. În acest timp, am ajuns la o constatare: Sunt incredibil de norocos că te-am întâlnit. Deja la începutul comunicării noastre am simțit că ești o persoană specială, dar o lună mai târziu încrederea mea în acest lucru nu a făcut decât să crească.
+Ești o persoană uimitoare. Fiecare conversație pe care o avem între noi este mai mult decât un simplu schimb de mesaje, este mai mult decât atât, este ceva cu adevărat valoros și semnificativ. Îmi place să te cunosc, să-ți aud gândurile și să mi le împărtășesc pe ale mele. Știi cum să mă surprinzi, să mă faci să mă gândesc, să mă încânți, să mă amuzi și chiar să mă faci să râd. Comunicarea cu tine îmi umple zilele cu căldură și lejeritate, îmi creează un sentiment de confort și confort.
+Este deosebit de valoros faptul că rămâi tu însuți - sincer, onest și deschis. Într-o lume în care este atât de ușor să te pierzi printre agitație și conexiuni superficiale, tu mă ajuți să cred că o comunicare reală și profundă este încă posibilă. Bunătatea și abilitatea ta de a fi sinceră mă inspiră.
+Sunt foarte apropiată de felul în care privești lumea, de valorile, credințele și perspectivele tale.  Nu vă este teamă să vă împărtășiți adevărul interior, iar aceasta este o calitate pentru care am un respect profund. Da, înainte credeam că cuvântul „admir” este prea tare, dar acum îmi dau seama că măcar îl pot aplica undeva.
+Vreau să vă mulțumesc sincer pentru această lună de comunicare. Îți mulțumesc pentru fiecare conversație pe care am avut-o, pentru gândurile tale, pentru sinceritatea ta, în general pentru tine. Sunt foarte fericită să te am în viața mea. Această comunicare a devenit ceva special pentru mine și nu vreau să o pierd.</p>`
+        };
+        // Создаем летающие элементы
+        function createFloatingElements() {
+            const elements = ['🎈', '😊', '🥰', '✨', '🎉','💫','😏'];
+            const phrases = [
+                "Rapan", 
+                "Rapan de ființă și de tot", 
+                "Рита", 
+                "Маргарита - ты же помнишь, как все это было"
+            ];
+            const windowHeight = window.innerHeight;
+            const windowWidth = window.innerWidth;
+
+            // Уменьшаем количество эмодзи
+            for (let i = 0; i < 8; i++) {
+                const elem = document.createElement('div');
+                elem.className = 'floating-element';
+                elem.style.cssText = `
+                    left: ${Math.random() * (windowWidth - 50)}px;
+                    top: ${Math.random() * (windowHeight - 50)}px;
+                    font-size: ${30 + Math.random() * 30}px;
+                    animation-delay: ${Math.random() * 5}s;
+                `;
+                elem.innerHTML = elements[Math.floor(Math.random() * elements.length)];
+                document.body.appendChild(elem);
+            }
+
+            // Уменьшаем количество фраз
+            for (let i = 0; i < 6; i++) {
+                const phrase = phrases[Math.floor(Math.random() * phrases.length)];
+                const elem = document.createElement('div');
+                elem.className = 'floating-element phrase';
+                elem.style.cssText = `
+                    left: ${Math.random() * (windowWidth - 200)}px;
+                    top: ${Math.random() * (windowHeight - 50)}px;
+                    animation-duration: ${20 + Math.random() * 20}s;
+                    color: rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255});
+                `;
+                elem.textContent = phrase;
+                document.body.appendChild(elem);
+            }
+        }
+
+        // Создаем конфетти
+        function createConfetti() {
+            const colors = ['red', 'blue', 'green', 'yellow', 'pink', 'purple', 'orange'];
+            for (let i = 0; i < 20; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = `${Math.random() * 100}vw`;
+                confetti.style.animationDuration = `${2 + Math.random() * 3}s`;
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                document.body.appendChild(confetti);
+            }
+        }
+
+        function changeLanguage(lang) {
+            document.getElementById('message').innerHTML = texts[lang];
+        }
+        // Таймер
+        function updateTimer() {
+            const startDate = new Date('2025-01-03T23:52:00');
+            const now = new Date();
+            const diff = now - startDate;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById('timer').innerHTML = 
+                `Время с момента знакомства: ${days} дней ${hours} часов ${minutes} минут ${seconds} секунд`;
+        }
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', () => {
+            changeLanguage('ru');
+            createFloatingElements();
+            createConfetti();
+            setInterval(updateTimer, 1000);
+        });
+    </script>
+</body>
+</html>
